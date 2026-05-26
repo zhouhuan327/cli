@@ -99,6 +99,9 @@ Minutes (妙记) ← minute_token 标识
 > - 用户说"通过文件生成妙记 / 把音视频转妙记" → 先上传获取 `file_token`，然后使用 `minutes +upload`
 > - 用户说"把音视频文件转成纪要 / 逐字稿 / 文字稿 / 撰写文字 / 总结 / 待办 / 章节" → 先上传获取 `file_token`，调用 `minutes +upload` 生成 `minute_url`，再提取 `minute_token` 走 `vc +notes --minute-tokens`
 
+> - 用户说"替换 / 更新这个妙记的总结" → [`minutes +summary`](references/lark-minutes-summary.md)
+> - 用户说"替换 / 更新这个妙记的待办" → [`minutes +todo`](references/lark-minutes-todo.md)
+
 ## Shortcuts（推荐优先使用）
 
 Shortcut 是对常用操作的高级封装（`lark-cli minutes +<verb> [flags]`）。有 Shortcut 的操作优先使用。
@@ -108,10 +111,14 @@ Shortcut 是对常用操作的高级封装（`lark-cli minutes +<verb> [flags]`�
 | [`+search`](references/lark-minutes-search.md)     | Search minutes by keyword, owners, participants, and time range |
 | [`+download`](references/lark-minutes-download.md) | Download audio/video media file of a minute                     |
 | [`+upload`](references/lark-minutes-upload.md)     | Upload a media file token to generate a minute                  |
+| [`+summary`](references/lark-minutes-summary.md)   | Replace the AI summary of a minute                              |
+| [`+todo`](references/lark-minutes-todo.md)         | Update one or more todo items and set is_done                   |
 
 - 使用 `+search` 命令时，必须阅读 [references/lark-minutes-search.md](references/lark-minutes-search.md)，了解搜索参数和返回值结构。
 - 使用 `+download` 命令时，必须阅读 [references/lark-minutes-download.md](references/lark-minutes-download.md)，了解下载参数和返回值结构。
 - 使用 `+upload` 命令时，必须阅读 [references/lark-minutes-upload.md](references/lark-minutes-upload.md)，了解生成参数和返回值结构。
+- 使用 `+summary` 时，必须阅读 [references/lark-minutes-summary.md](references/lark-minutes-summary.md)；妙记端通常可良好展示：一级/二级/三级标题（`#` / `##` / `###`）、加粗（`**text**`）、无序列表（`-` / `*`）、有序列表（`1.`），以及纯文本与换行；不支持的 Markdown 语法会按原始文本展示，接口不会因此拒绝，Agent 写入时应优先使用可展示子集。
+- 使用 `+todo` 时，必须阅读 [references/lark-minutes-todo.md](references/lark-minutes-todo.md)；批量更新用 `--todo-list` JSON 数组（含 `is_done`），单条可用 `--todo`（纯文本）与 `--is-done` 成对传入。
 
 <!-- AUTO-GENERATED-START — gen-skills.py 管理，勿手动编辑 -->
 
